@@ -1,1 +1,1 @@
-# file-reference-version
+### 给html/jsp/asp 文件添加版本号
