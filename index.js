@@ -5,6 +5,8 @@ var crypto = require('crypto');
 var list = [];
 var count = 0;
 
+var jsFlag = true, cssFlag = true, codeL = 8;
+
 function readDir(_path, callback) {
 
     var toExec = function (_path) {
@@ -37,49 +39,63 @@ function readDir(_path, callback) {
     toExec(_path);
 };
 
-
 function getMd5() {
     var st = crypto.createHash('md5')
     st.update(new Date().getTime() + '', 'utf-8')
     return st.digest('hex')
 }
 
-readDir(folder, function (_list) {
-    var md5Code = getMd5();
+module.exports = function(folder, jsf, cssf, l) {
+    console.log("需要添加版本号的目录/文件:" + folder);
+    console.log('script 是否需要添加/修改版本号：' + jsf);
+    console.log('link 是否需要添加/修改版本号：' + cssf);
+    console.log('--------------------------------------');
+    jsFlag = jsf;
+    cssFlag = cssf;
 
-    _list.forEach(function(file, i) {
-        fs.readFile(file, 'utf-8', (err, data) => {
+    codeL = l ? l : 8;
 
-            var reg = new RegExp('link.*href=".*.css.*"','g');
-            var replaceList = [];
-            while (rs = reg.exec(data))
-            {
-                // 找到的需要添加或修改版本号的路径
-                var url = rs.toString();
-                replaceList.push(url);
-            }
+    readDir(folder, function (_list) {
+        var md5Code = getMd5();
+        md5Code = md5Code.substring(0, codeL)
+        _list.forEach(function(file, i) {
+            fs.readFile(file, 'utf-8', (err, data) => {
 
-            reg = new RegExp('script.*src=".*.js.*"','g');
-            while (rs = reg.exec(data))
-            {
-                // 找到的需要添加或修改版本号的路径
-                var url = rs.toString();
-                replaceList.push(url);
-            }
+                var replaceList = [];
+                var reg = null;
+                // link 是否需要添加版本号
+                if(cssFlag) {
+                    reg = new RegExp('link.*href=".*.css.*"','g');
+                    while (rs = reg.exec(data))
+                    {
+                        // 找到的需要添加或修改版本号的路径
+                        var url = rs.toString();
+                        replaceList.push(url);
+                    }
+                }
+                // script 是否需要添加版本号
+                if(jsFlag) {
+                    reg = new RegExp('script.*src=".*.js.*"','g');
+                    while (rs = reg.exec(data))
+                    {
+                        // 找到的需要添加或修改版本号的路径
+                        var url = rs.toString();
+                        replaceList.push(url);
+                    }
+                }
 
-            replaceList.forEach(function(quote, i) {
-                var rpUrl = quote.indexOf('?v=') >= 0 ? quote.substring(0, quote.indexOf('?v=')) + '?v=' + md5Code + '"' : quote.substring(0, quote.length - 1) + '?v=' + md5Code;
-                console.log();
-                data = data.replace(quote, rpUrl)
-            })
+                replaceList.forEach(function(quote, i) {
+                    var rpUrl = quote.indexOf('?v=') >= 0 ? quote.substring(0, quote.indexOf('?v=')) + '?v=' + md5Code + '"' : quote.substring(0, quote.length - 1) + '?v=' + md5Code;
+                    data = data.replace(quote, rpUrl)
+                })
 
-            fs.writeFile(file, data, (err) => {
-                console.log(file + '写入成功');
+                fs.writeFile(file, data, function(err) {
+                    if(err) {
+                        console.log(file + ' 添加失败');
+                    }
+                    console.log(file + ' 添加成功');
+                })
             })
         })
-    })
-});
-
-export.fileReferenceVersion = function() {
-
+    });
 }

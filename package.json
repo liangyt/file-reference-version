@@ -1,0 +1,25 @@
+{
+  "name": "file-reference-version",
+  "version": "1.0.0",
+  "description": "'add version to script link'",
+  "main": "index.js",
+  "bin": {
+    "frv": "bin/frv.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liangyt/file-reference-version.git"
+  },
+  "keywords": [
+    "version"
+  ],
+  "author": "liangyongtong",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/liangyt/file-reference-version/issues"
+  },
+  "homepage": "https://github.com/liangyt/file-reference-version#readme"
+}
