@@ -31,6 +31,15 @@ src/view/index.jsp 添加成功
 src/view/first/one.jsp 添加成功
 ```
 
+####例子
+```
+<link rel="stylesheet" type="text/css" href="wap/css/index.css">
+<script type="text/javascript" src="wap/js/ordersuccess.js"></script>
+==>
+<link rel="stylesheet" type="text/css" href="wap/css/index.css?v=4821dd5d">
+<script type="text/javascript" src="wap/js/ordersuccess.js?v=4821dd5d"></script>
+```
+
 ####注意事项
 1.由于匹配的是使用正则表达式，没有写得特别强大，所以写link,srcipt 的时候，href/src 后面需要使用双引号(""),否则匹配不上。
 
