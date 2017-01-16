@@ -50,5 +50,9 @@ else {
             l = parseInt(p.split('=')[1].trim());
         }
     }
+    if(d == '') {
+        console.error('目录不能为空');
+        return;
+    }
     frv(d, js, css, l)
 }

@@ -9,6 +9,8 @@ var jsFlag = true, cssFlag = true, codeL = 8;
 
 function readDir(_path, callback) {
 
+    // 递归取得该目录下面所有的文件路径
+
     var toExec = function (_path) {
         count++;
         fs.readdir(_path, function (err, files) {
@@ -39,6 +41,7 @@ function readDir(_path, callback) {
     toExec(_path);
 };
 
+// 取得md5
 function getMd5() {
     var st = crypto.createHash('md5')
     st.update(new Date().getTime() + '', 'utf-8')
@@ -68,7 +71,7 @@ module.exports = function(folder, jsf, cssf, l) {
                     reg = new RegExp('link.*href=".*.css.*"','g');
                     while (rs = reg.exec(data))
                     {
-                        // 找到的需要添加或修改版本号的路径
+                        // 找到需要添加或修改版本号的路径
                         var url = rs.toString();
                         replaceList.push(url);
                     }
@@ -78,7 +81,7 @@ module.exports = function(folder, jsf, cssf, l) {
                     reg = new RegExp('script.*src=".*.js.*"','g');
                     while (rs = reg.exec(data))
                     {
-                        // 找到的需要添加或修改版本号的路径
+                        // 找到需要添加或修改版本号的路径
                         var url = rs.toString();
                         replaceList.push(url);
                     }
@@ -89,9 +92,11 @@ module.exports = function(folder, jsf, cssf, l) {
                     data = data.replace(quote, rpUrl)
                 })
 
+                // 把处理的字符串写回文件中
                 fs.writeFile(file, data, function(err) {
                     if(err) {
                         console.log(file + ' 添加失败');
+                        return;
                     }
                     console.log(file + ' 添加成功');
                 })
