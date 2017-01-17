@@ -22,7 +22,9 @@ function readDir(_path, callback) {
             files.forEach(function (file, i) {
                 var stat = fs.lstatSync(path.join(_path, file));
                 if (stat.isFile()) {
-                    list.push(path.join(_path, file));
+                    // 只处理jsp html htm asp
+                    if(file.lastIndexOf('.jsp') >= 0 || file.lastIndexOf('.html') >= 0 || file.lastIndexOf('.htm') >= 0 || file.lastIndexOf('.asp') >= 0)
+                        list.push(path.join(_path, file));
                 } else if (stat.isDirectory()) {
                     toExec(path.join(_path, file));
                 }
