@@ -1,6 +1,6 @@
 {
   "name": "file-reference-version",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "'add version to script link'",
   "main": "index.js",
   "bin": {
