@@ -90,7 +90,7 @@ module.exports = function(folder, jsf, cssf, l) {
                 }
 
                 replaceList.forEach(function(quote, i) {
-                    var rpUrl = quote.indexOf('?v=') >= 0 ? quote.substring(0, quote.indexOf('?v=')) + '?v=' + md5Code + '"' : quote.substring(0, quote.length - 1) + '?v=' + md5Code;
+                    var rpUrl = quote.indexOf('?v=') >= 0 ? quote.substring(0, quote.indexOf('?v=')) + '?v=' + md5Code + '"' : quote.substring(0, quote.length - 1) + '?v=' + md5Code + '"';
                     data = data.replace(quote, rpUrl)
                 })
 
