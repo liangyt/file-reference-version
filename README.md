@@ -33,14 +33,20 @@ src/view/first/one.jsp 添加成功
 
 ####例子
 ```
+1.
 <link rel="stylesheet" type="text/css" href="wap/css/index.css">
 <script type="text/javascript" src="wap/js/ordersuccess.js"></script>
 ==>
 <link rel="stylesheet" type="text/css" href="wap/css/index.css?v=4821dd5d">
 <script type="text/javascript" src="wap/js/ordersuccess.js?v=4821dd5d"></script>
+
+2.
+<link rel="stylesheet" type="text/css" href="wap/css/index.css?v=4821dd5d">
+<script type="text/javascript" src="wap/js/ordersuccess.js?v=4821dd5d"></script>
+==>
+<link rel="stylesheet" type="text/css" href="wap/css/index.css?v=14443b56">
+<script type="text/javascript" src="wap/js/ordersuccess.js?v=14443b56"></script>
 ```
 
 ####注意事项
 1.由于匹配的是使用正则表达式，没有写得特别强大，所以写link,script 的时候，href/src 后面需要使用双引号(""),否则匹配不上。
-
-2.-d 目前暂时只支持文件夹，不支持文件

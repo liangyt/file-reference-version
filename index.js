@@ -12,6 +12,14 @@ function readDir(_path, callback) {
     // 递归取得该目录下面所有的文件路径
 
     var toExec = function (_path) {
+
+        var pathJud = fs.lstatSync(_path);
+        // 判断是否文件
+        if(pathJud.isFile()) {
+            callback([_path]);
+            return;
+        }
+
         count++;
         fs.readdir(_path, function (err, files) {
             if (err) {

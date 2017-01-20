@@ -14,11 +14,11 @@ else if(params.length === 1) {
     var p = params[0];
     // 版本号
     if(p === '-v' || p === '-V') {
-        console.log('file-reference-version 1.0.3');
+        console.log('file-reference-version 1.0.4');
     }
     // 帮助
     else if(p === '-h') {
-        console.log('file-reference-version 1.0.3');
+        console.log('file-reference-version 1.0.4');
         console.log('-h 查看帮助');
         console.log('-v 查看版本');
         console.log('-d -d=src 需要添加修改版本号的文件目录');
