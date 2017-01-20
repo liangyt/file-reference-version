@@ -70,7 +70,7 @@ module.exports = function(folder, jsf, cssf, l) {
                 var reg = null;
                 // link 是否需要添加版本号
                 if(cssFlag) {
-                    reg = new RegExp('link.*href=".*.css.*"','g');
+                    reg = new RegExp('link.*href=".*.css[^"]*"','g');
                     while (rs = reg.exec(data))
                     {
                         // 找到需要添加或修改版本号的路径
@@ -80,7 +80,7 @@ module.exports = function(folder, jsf, cssf, l) {
                 }
                 // script 是否需要添加版本号
                 if(jsFlag) {
-                    reg = new RegExp('script.*src=".*.js.*"','g');
+                    reg = new RegExp('script.*src=".*.js[^"]*"','g');
                     while (rs = reg.exec(data))
                     {
                         // 找到需要添加或修改版本号的路径
